@@ -1,0 +1,18 @@
+
+spring:
+  application:
+    name: notes-disqo
+  datasource:
+    url: jdbc:mysql://localhost:3306/notes?useUnicode=yes&characterEncoding=UTF-8
+    username: root
+    password: root
+  flyway:
+    enabled: true
+  jpa:
+    hibernate:
+      ddl-auto: none
+      use-new-id-generator-mappings: true
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    database-platform: org.hibernate.dialect.MySQL5Dialect
+
