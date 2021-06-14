@@ -1,12 +1,10 @@
 package com.notes.disqo.domain;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Getter
 @Setter
@@ -14,6 +12,8 @@ import javax.persistence.*;
 @javax.persistence.Table(name = "Note")
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
+@EqualsAndHashCode
 public class Note extends AbstractEntity {
 
     @Column(name = "TITLE")
@@ -25,4 +25,7 @@ public class Note extends AbstractEntity {
     @ManyToOne
     @JoinColumn(name = "USER_ID")
     private User user;
+
+    @OneToMany(mappedBy = "note", fetch = FetchType.LAZY, orphanRemoval = true)
+    private List<FileMetadata> fileMetadata;
 }

@@ -2,10 +2,7 @@ package com.notes.disqo.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.notes.disqo.enumeration.Role;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Positive;
@@ -16,6 +13,8 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
+@EqualsAndHashCode
 public class UserDTO {
 
     @Positive

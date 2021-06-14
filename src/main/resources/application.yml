@@ -24,3 +24,12 @@ security:
     secret: token
     validity: 1800
 #endregion security
+
+#region cloud
+cloud:
+  storage:
+    app-key: AKIAV3OXBPMUKMY6RSVG
+    secret: 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
+    bucket-name: educationalfoundation
+    region: eu-west-2
+#endregion cloud

@@ -99,7 +99,7 @@ public class UserService implements UserDetailsService {
 
     public User findById(Long id) {
         Optional<User> optUser = userRepository.findById(id);
-        if(!optUser.isPresent()){
+        if (!optUser.isPresent()) {
             throw new UserIsNotFoundException();
         }
         return optUser.get();

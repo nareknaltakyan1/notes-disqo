@@ -1,21 +1,20 @@
 package com.notes.disqo.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.notes.disqo.domain.User;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
 import java.util.Date;
+import java.util.List;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
+@EqualsAndHashCode
 public class NoteDTO {
 
     @Positive
@@ -35,4 +34,6 @@ public class NoteDTO {
     private Date createDate;
 
     private Date lastModifyDate;
+
+    private List<String> files;
 }

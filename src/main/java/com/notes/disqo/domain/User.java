@@ -2,10 +2,7 @@ package com.notes.disqo.domain;
 
 
 import com.notes.disqo.enumeration.Role;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
@@ -16,6 +13,8 @@ import java.util.List;
 @javax.persistence.Table(name = "USER")
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
+@EqualsAndHashCode
 public class User extends AbstractEntity{
 
     @Column(name = "EMAIL")

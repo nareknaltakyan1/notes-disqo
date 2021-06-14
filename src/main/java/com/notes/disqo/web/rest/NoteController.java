@@ -22,32 +22,32 @@ public class NoteController {
     }
 
     @PostMapping
-    public ResponseEntity<?> createNote(@RequestBody NoteDTO noteDTO){
+    public ResponseEntity<?> createNote(@RequestBody NoteDTO noteDTO) {
         log.debug("REST request to create Note: {}", noteDTO);
         return new ResponseEntity<>(noteService.createNote(noteDTO), HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<?> updateNote(@PathVariable(value = "id", required = false) final Long id,
-                                        @RequestBody NoteDTO noteDTO){
+                                        @RequestBody NoteDTO noteDTO) {
         log.debug("REST request to update Note: {} {}", id, noteDTO);
         return new ResponseEntity<>(noteService.updateNote(noteDTO, id), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> getNote(@PathVariable(value = "id", required = false) final Long id){
+    public ResponseEntity<?> getNote(@PathVariable(value = "id", required = false) final Long id) {
         log.debug("REST request to get Note: {}", id);
         return new ResponseEntity<>(noteService.getNote(id), HttpStatus.OK);
     }
 
     @GetMapping
-    public ResponseEntity<?> getAllNote(Pageable pageable){
+    public ResponseEntity<?> getAllNote(Pageable pageable) {
         log.debug("REST request to get User All Notes");
         return new ResponseEntity<>(noteService.getUserAllNotes(pageable), HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteNote(@PathVariable(value = "id", required = false) final Long id){
+    public ResponseEntity<?> deleteNote(@PathVariable(value = "id", required = false) final Long id) {
         noteService.deleteNote(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
