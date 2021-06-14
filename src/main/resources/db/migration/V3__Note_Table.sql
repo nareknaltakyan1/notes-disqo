@@ -20,3 +20,4 @@ CREATE TABLE NOTE
         REFERENCES USER(ID)
 )
     engine = InnoDB;
+

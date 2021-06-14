@@ -1,15 +1,13 @@
 package com.notes.disqo.domain;
 
 
+import com.notes.disqo.enumeration.Role;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.List;
 
 @Getter
@@ -25,10 +23,14 @@ public class User extends AbstractEntity{
 //# - Create Time
 //# - Last Update Time
     @Column(name = "EMAIL")
-    private String email;
+    private String username;
 
     @Column(name = "PASSWORD")
     private String password;
+
+    @Enumerated
+    @Column(name = "ROLE")
+    private Role role;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, orphanRemoval = true)
     private List<Note> notes;

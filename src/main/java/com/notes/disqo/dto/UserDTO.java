@@ -2,6 +2,7 @@ package com.notes.disqo.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.notes.disqo.domain.Note;
+import com.notes.disqo.enumeration.Role;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,12 +23,15 @@ public class UserDTO {
     private Long id;
 
     @Email
-    private String email;
+    private String username;
 
     @JsonIgnore
     private String password;
 
     private List<Note> notes;
+
+    @JsonIgnore
+    private Role role;
 
     @JsonIgnore
     private LocalDateTime createDate;
