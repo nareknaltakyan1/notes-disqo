@@ -15,3 +15,12 @@ spring:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
     database-platform: org.hibernate.dialect.MySQL5Dialect
 
+#region security
+jwt:
+  expiration-time-pattern: 86400
+security:
+  token:
+    header: accessToken
+    secret: token
+    validity: 1800
+#endregion security
