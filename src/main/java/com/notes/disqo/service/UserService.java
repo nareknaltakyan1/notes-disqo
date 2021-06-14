@@ -3,8 +3,11 @@ package com.notes.disqo.service;
 import com.notes.disqo.domain.User;
 import com.notes.disqo.dto.UserDTO;
 import com.notes.disqo.dto.payload.RegistrationDTO;
+import com.notes.disqo.exaption.UserIsNotFoundException;
+import com.notes.disqo.exaption.EmailAlreadyExistException;
 import com.notes.disqo.repository.UserRepository;
 import com.notes.disqo.security.UserPrincipal;
+import com.notes.disqo.util.SecurityUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -35,10 +38,8 @@ public class UserService implements UserDetailsService {
         Optional<User> existingUserOpt = userRepository.findByUsername(registrationDTO.getUsername());
 
         if (existingUserOpt.isPresent()) {
-            log.error("Username already exists");
-            //todo
-            throw new RuntimeException("Username");
-//            throw new UsernameAlreadyExistException();
+            log.error("Email already exists");
+            throw new EmailAlreadyExistException();
         }
 
         User user = userRepository.save(constructNewUserEntity(registrationDTO));
@@ -105,5 +106,18 @@ public class UserService implements UserDetailsService {
                 .role(user.getRole())
                 .enabled(true)
                 .build();
+    }
+
+    public User getUser() {
+        Optional<String> username = SecurityUtils.getCurrentUserLogin();
+        return username.map(userRepository::getByUsername).orElse(null);
+    }
+
+    public User findById(Long id) {
+        Optional<User> optUser = userRepository.findById(id);
+        if(!optUser.isPresent()){
+            throw new UserIsNotFoundException();
+        }
+        return optUser.get();
     }
 }

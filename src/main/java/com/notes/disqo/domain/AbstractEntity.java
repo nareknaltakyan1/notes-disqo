@@ -8,7 +8,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
+import java.util.Date;
 
 @Getter
 @Setter
@@ -22,11 +22,22 @@ public abstract class AbstractEntity {
     @Column(name = "ID")
     private Long id;
 
-    @CreatedDate
+//    @CreatedDate
     @Column(name = "CREATION_DATE")
-    private LocalDateTime createDate;
+    private Date createDate;
 
-    @LastModifiedDate
+//    @LastModifiedDate
     @Column(name = "LAST_MODIFICATION_DATE")
-    private LocalDateTime lastModifyDate;
+    private Date lastModifyDate;
+
+    @PreUpdate
+    public void onUpdate() {
+        this.lastModifyDate = new Date();
+    }
+
+    @PrePersist
+    public void onCreate() {
+        this.createDate = new Date();
+        this.lastModifyDate = new Date();
+    }
 }

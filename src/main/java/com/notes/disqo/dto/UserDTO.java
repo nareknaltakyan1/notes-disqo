@@ -28,7 +28,7 @@ public class UserDTO {
     @JsonIgnore
     private String password;
 
-    private List<Note> notes;
+    private List<NoteDTO> notes;
 
     @JsonIgnore
     private Role role;

@@ -10,7 +10,7 @@ import lombok.Setter;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
-import java.time.LocalDateTime;
+import java.util.Date;
 
 @Getter
 @Setter
@@ -29,11 +29,12 @@ public class NoteDTO {
     @NotBlank
     private String content;
 
-    private User user;
-
     @JsonIgnore
-    private LocalDateTime createDate;
+    private UserDTO user;
 
-    @JsonIgnore
-    private LocalDateTime lastModifyDate;
+//    @JsonIgnore
+    private Date createDate;
+
+//    @JsonIgnore
+    private Date lastModifyDate;
 }
