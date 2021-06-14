@@ -4,6 +4,7 @@ import com.amazonaws.HttpMethod;
 import com.amazonaws.services.s3.model.PutObjectResult;
 import com.notes.disqo.config.CloudStorageConfig;
 import com.notes.disqo.dto.FileMetadataDTO;
+import com.notes.disqo.exaption.UnknownFileExtensionException;
 import com.notes.disqo.util.FileUtil;
 import com.notes.disqo.validator.FileValidator;
 import org.springframework.core.io.Resource;
@@ -48,17 +49,13 @@ public class AwsStorageService implements StorageService {
     public FileMetadataDTO store(MultipartFile file, String guid) {
         String extension = FileUtil.getFileExtension(file);
         if (!StringUtils.hasText(extension)) {
-//            todo
-            throw new RuntimeException("Unknown file extension");
-//            throw new AppIllegalStateException("Unknown file extension");
+            throw new UnknownFileExtensionException();
         }
         String filename = FileUtil.getFilenameWithExtension(guid, extension);
         String contentType = FileUtil.getFileContentType(file);
 
         if (!fileValidator.validateFileType(contentType, extension)) {
-//            todo
-            throw new RuntimeException("Unknown file extension");
-//            throw new AppIllegalStateException("Wrong file type");
+            throw new UnknownFileExtensionException();
         }
 
         String key = PATH_UPLOADS + "/" + filename;

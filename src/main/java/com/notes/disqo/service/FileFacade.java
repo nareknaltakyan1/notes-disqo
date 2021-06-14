@@ -2,6 +2,7 @@ package com.notes.disqo.service;
 
 import com.notes.disqo.domain.FileMetadata;
 import com.notes.disqo.dto.FileMetadataDTO;
+import com.notes.disqo.exaption.FileNotFoundException;
 import com.notes.disqo.service.aws.StorageService;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.core.io.Resource;
@@ -65,9 +66,7 @@ public class FileFacade {
     public Resource loadFile(String guid) {
         FileMetadata file = fileMetadataService.getFile(guid);
         if (file == null) {
-//            todo
-            throw new RuntimeException(guid);
-//            throw new NotFoundException(guid);
+            throw new FileNotFoundException(guid);
         }
 
         return storageService.loadAsResource(file.getPath());
