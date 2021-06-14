@@ -22,11 +22,9 @@ public abstract class AbstractEntity {
     @Column(name = "ID")
     private Long id;
 
-//    @CreatedDate
     @Column(name = "CREATION_DATE")
     private Date createDate;
 
-//    @LastModifiedDate
     @Column(name = "LAST_MODIFICATION_DATE")
     private Date lastModifyDate;
 

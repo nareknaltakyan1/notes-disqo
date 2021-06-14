@@ -32,9 +32,7 @@ public class NoteDTO {
     @JsonIgnore
     private UserDTO user;
 
-//    @JsonIgnore
     private Date createDate;
 
-//    @JsonIgnore
     private Date lastModifyDate;
 }

@@ -13,7 +13,6 @@ public class NoteMapper {
         if (noteDTO == null) {
             return null;
         }
-
         Note note = new Note();
         note.setId(noteDTO.getId());
         note.setContent(noteDTO.getContent());
@@ -27,7 +26,6 @@ public class NoteMapper {
         if (note == null) {
             return null;
         }
-
         NoteDTO noteDTO = new NoteDTO();
         noteDTO.setId(note.getId());
         noteDTO.setContent(note.getContent());

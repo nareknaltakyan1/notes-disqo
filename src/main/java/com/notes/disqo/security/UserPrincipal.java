@@ -24,7 +24,6 @@ public class UserPrincipal implements UserDetails {
     Role role;
     boolean enabled;
 
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return Collections.singleton(new SimpleGrantedAuthority("ROLE_" + role));

@@ -17,11 +17,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class User extends AbstractEntity{
-//# A user in the system. It contains the following fields:
-//# - Email: Non-blank, valid email address, unique
-//# - Password: Non-blank, at least 8 characters
-//# - Create Time
-//# - Last Update Time
+
     @Column(name = "EMAIL")
     private String username;
 

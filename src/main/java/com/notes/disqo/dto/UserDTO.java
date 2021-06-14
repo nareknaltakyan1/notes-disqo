@@ -1,7 +1,6 @@
 package com.notes.disqo.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.notes.disqo.domain.Note;
 import com.notes.disqo.enumeration.Role;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

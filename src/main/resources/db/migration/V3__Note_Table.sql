@@ -17,7 +17,7 @@ CREATE TABLE NOTE
     INDEX (TITLE),
 
     CONSTRAINT fk_USER_NOTE FOREIGN KEY (USER_ID)
-        REFERENCES USER(ID)
+        REFERENCES notes.USER(ID)
 )
     engine = InnoDB;
 

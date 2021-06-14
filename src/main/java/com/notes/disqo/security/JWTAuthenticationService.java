@@ -34,12 +34,10 @@ public class JWTAuthenticationService {
     }
 
     public String generateAuthHeader(Authentication auth) {
-
         final String[] authorities = auth.getAuthorities()
                 .stream()
                 .map(GrantedAuthority::getAuthority)
                 .toArray(String[]::new);
-
         UserPrincipal principal = (UserPrincipal) auth.getPrincipal();
 
         return JWT.create()
@@ -52,30 +50,21 @@ public class JWTAuthenticationService {
     }
 
     public Authentication parseAuthHeader(String authToken) {
-
         if (authToken == null) {
             return null;
         }
-
         UserPrincipal userPrincipal = extractUserPrincipal(authToken);
-
         List<SimpleGrantedAuthority> authorities = extractAuthorities(authToken);
-
         return new UsernamePasswordAuthenticationToken(userPrincipal, null, authorities);
     }
 
-
     public static UserPrincipal extractUserPrincipal(String authToken) {
-
         DecodedJWT decodedJWT = JWTAuthenticationService.decodeJwt(authToken);
         Map<String, Claim> claims = decodedJWT.getClaims();
-
         String username = claims.get(JWTAuthenticationService.SUBJECT).asString();
         Boolean enabled = claims.get(JWTAuthenticationService.ENABLED).asBoolean();
         Long id = claims.get(ID).asLong();
-
         List<SimpleGrantedAuthority> authorities = extractAuthorities(authToken);
-
         Role role = authorities
                 .stream()
                 .map(GrantedAuthority::getAuthority)
@@ -83,7 +72,6 @@ public class JWTAuthenticationService {
                 .map(Role::valueOf)
                 .findFirst()
                 .orElseThrow(IllegalArgumentException::new);
-
 
         return UserPrincipal.builder()
                 .id(id)
@@ -94,12 +82,9 @@ public class JWTAuthenticationService {
     }
 
     public static List<SimpleGrantedAuthority> extractAuthorities(String authToken) {
-
         DecodedJWT decodedJWT = JWTAuthenticationService.decodeJwt(authToken);
         Map<String, Claim> claims = decodedJWT.getClaims();
-
         @SuppressWarnings("unchecked") final List<String> authoritiesClaim = claims.get(AUTHORITIES).asList(String.class);
-
         return authoritiesClaim
                 .stream()
                 .map(SimpleGrantedAuthority::new)
@@ -107,14 +92,11 @@ public class JWTAuthenticationService {
     }
 
     public static DecodedJWT decodeJwt(String authToken) {
-
         JWTVerifier verifier = buildVerifier();
-
         return verifier.verify(authToken);
     }
 
     public static JWTVerifier buildVerifier() {
-
         return JWT.require(Algorithm.HMAC256(SECRET))
                 .build();
     }

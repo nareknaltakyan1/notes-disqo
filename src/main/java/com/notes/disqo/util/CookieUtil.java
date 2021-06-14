@@ -11,13 +11,11 @@ public final class CookieUtil {
 
     public static void setCookie(HttpServletRequest request, HttpServletResponse response, String name, String value) {
         Cookie cookie = WebUtils.getCookie(request, name);
-
         if (cookie != null) {
             cookie.setValue(value);
         } else {
             cookie = new Cookie(name, value);
         }
-
         cookie.setPath("/");
         response.addCookie(cookie);
     }

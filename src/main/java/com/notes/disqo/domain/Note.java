@@ -15,13 +15,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Note extends AbstractEntity {
-//-- Note:
-//-- A note in the system. Notes are associated with Users.
-//-- A user can have many notes. A note has the following fields:
-//-- - Title: Non-blank, max 50 characters long
-//-- - Note: max 1000 long
-//-- - Create Time
-//-- - Last Update Time
+
     @Column(name = "TITLE")
     private String title;
 

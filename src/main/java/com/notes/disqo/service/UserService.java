@@ -34,30 +34,23 @@ public class UserService implements UserDetailsService {
     }
 
     public UserDTO userRegistration(RegistrationDTO registrationDTO) {
-
         Optional<User> existingUserOpt = userRepository.findByUsername(registrationDTO.getUsername());
-
         if (existingUserOpt.isPresent()) {
             log.error("Email already exists");
             throw new EmailAlreadyExistException();
         }
-
         User user = userRepository.save(constructNewUserEntity(registrationDTO));
-
         return userEntityToDto(user);
     }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-
         Optional<User> userOpt = userRepository.findByUsername(username);
-
         if (!userOpt.isPresent()) {
             final String errorMsg = "User with such email doesn't exist";
             log.error(errorMsg);
             throw new UsernameNotFoundException(errorMsg);
         }
-
         return constructUserPrincipal(userOpt.get());
     }
 
@@ -68,32 +61,23 @@ public class UserService implements UserDetailsService {
     }
 
     public static UserDTO userEntityToDto(User user) {
-
         if (user == null) {
             return null;
         }
-
         UserDTO userDTO = new UserDTO();
-
         userDTO.setId(user.getId());
         userDTO.setUsername(user.getUsername());
         userDTO.setRole(user.getRole());
-
         return userDTO;
     }
 
 
     private User constructNewUserEntity(RegistrationDTO payload) {
-
         User user = new User();
-
         user.setUsername(payload.getUsername());
         user.setRole(payload.getRole());
-
         String encodedPassword = passwordEncoder.encode(payload.getPassword());
-
         user.setPassword(encodedPassword);
-
         return user;
     }
 
